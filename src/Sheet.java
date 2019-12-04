@@ -95,7 +95,7 @@ public class Sheet {
 		output += String.format("|%1$-20s|%2$-20s|\n", "Limit", SHAPE_LIMIT);
 		output += String.format("|%1$-20s|%2$-20s|\n", "Shelve height", allShelvesHeight());
 		output += "-------------------------------------------\n";
-		output += "================Shelf Shelves==============\n";
+		output += "================Sheet Shelves==============\n";
 		for (Shelf s : shelves) {
 			output += s;
 		}

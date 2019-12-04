@@ -28,43 +28,22 @@ public class Algorithms {
 	 *         of sheets used.
 	 **/
 
-	public void rotate(Shape s) {
+	public Shape rotate(Shape s) {
 		int temp = s.getHeight();
 		s.setHeight(s.getWidth());
 		s.setWidth(temp);
+		return s;
 	}
 
 	public List<Sheet> nextFit(List<Shape> shapes) {
-		// Accessible to all statements; if need reassign new to point to new sheet
 		Sheet sheet = new Sheet();
-		// Accessible to all statement; if need reassign to point to new
 		Shelf shelf = new Shelf();
-		/*
-		 * no need to loop through variables
-		 */
 		Shape s = shapes.get(0);
-		// int totalWidth = s.getWidth();
-		int totalArea = s.getArea();
-
 		shelf.place(s); // place shape in height
-
-		int max_width = Sheet.SHEET_WIDTH;
-		int max_height = shelf.getHeight(); // set max height
-		int max_area = shelf.getArea(); // set area
-
-		/*
-		 * Start with an empty list of sheets (remember each sheet has a width of 300
-		 * and a height of 250 as specified in the Sheet class)
-		 */
+		int max_height = shelf.getHeight(); // set max heighT
 		List<Sheet> usedSheets = new ArrayList<Sheet>();
-
-		/*
-		 * Add in your own code so that the method will place all the shapes according
-		 * to NextFit under ALL the assumptions mentioned in the specification
-		 */
 		sheet.addShelf(shelf); // add shelf as we used a shelf
 		usedSheets.add(sheet); // add used sheet as we used a sheet
-
 		for (int i = 1; i < shapes.size(); i++) {
 			/**
 			 * As it next fit the total area of the shape is the max height and the width of
@@ -72,31 +51,33 @@ public class Algorithms {
 			 * to consider shapes where it has space on top.
 			 */
 			s = shapes.get(i);
-			int area = (s.getHeight() > max_height) ? s.getArea() : s.getWidth() * max_height;
-			if (totalArea + area > max_area) { // added shape exceeds the max area
-				shelf = new Shelf(); // point to a new shelf (create new shelf)
-				shelf.place(s); // place s in shelf
-				totalArea = 0; // reset total 0
-				totalArea += s.getWidth() * max_height; // add total area
-				max_height = shelf.getHeight(); // set height
-				max_area = shelf.getArea(); // set area
-				if (sheet.allShelvesHeight() + shelf.getHeight() > Sheet.SHEET_HEIGHT) { // new sheet need
-					sheet = new Sheet(); // point to a new shelf (create new shelf)
+			/**
+			 * These two logical if statement uses the analogy of fitting a object (book,
+			 * shape etc) into a shelf if the shape does not fit rotate it the other way if
+			 * it does not fit then make a new shelf.
+			 */
+			if (s.getWidth() + shelf.getWidth() <= Sheet.SHEET_WIDTH && s.getHeight() <= max_height) {
+				shelf.place(s);
+			} else if ((s.getWidth() + shelf.getWidth() > Sheet.SHEET_WIDTH)
+					&& (s.getHeight() + shelf.getWidth() < Sheet.SHEET_WIDTH) && (s.getWidth() <= max_height)) {
+				s = rotate(s);
+				shelf.place(s);
+			} else if ((s.getHeight() > max_height) && (s.getWidth() < max_height)
+					&& (s.getHeight() + shelf.getWidth() <= Sheet.SHEET_WIDTH)) {
+				s = rotate(s);
+				shelf.place(s);
+			} else {
+				shelf = new Shelf(); // not enough space then new shelf; point to new shelf
+				shelf.place(s);
+				max_height = shelf.getHeight();
+				if (sheet.allShelvesHeight() + shelf.getHeight() > Sheet.SHEET_HEIGHT) {
+					sheet = new Sheet(); // point to a new sheet object
 					sheet.addShelf(shelf);
 					usedSheets.add(sheet);
 				} else {
-					sheet.addShelf(shelf); // then add shelf
+					sheet.addShelf(shelf);
 				}
-
-			} else if (shelf.getWidth() + s.getWidth() > max_width || s.getHeight() > max_height) {
-				rotate(s);
-				shelf.place(s);
-				totalArea += area;
-			} else {
-				shelf.place(s);
-				totalArea += area;
 			}
-
 		}
 
 		return usedSheets;

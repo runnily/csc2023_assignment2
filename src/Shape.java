@@ -12,7 +12,6 @@ public class Shape implements Comparable<Shape> {
 
 	private int sWidth; // width of the shape
 	private int sHeight; // height of the shape
-	private int sArea; // Area of the shape
 
 	/**
 	 * A Shape constructor to set the width and height of a shape.
@@ -57,11 +56,6 @@ public class Shape implements Comparable<Shape> {
 	 **/
 	public void setWidth(int sWidth) {
 		this.sWidth = sWidth;
-	}
-
-	public int getArea() {
-		sArea = getHeight() * getWidth();
-		return sArea;
 	}
 
 	@Override

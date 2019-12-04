@@ -19,10 +19,6 @@ public class Shelf {
 	// Shelf height: Equals to the height of the first shape placed in the shelf
 	private int shelfHeight;
 
-	// Shelf area: The total area is equal to width of the sheet (as thats the max
-	// width) * height
-	private int area;
-
 	// List of shapes stored in the shelf
 	List<Shape> shapes = new ArrayList<Shape>();
 
@@ -44,14 +40,6 @@ public class Shelf {
 			return this.shelfHeight;
 		} else
 			return 0;
-	}
-
-	/**
-	 * @return return area of sheet
-	 */
-	public int getArea() {
-		area = getHeight() * Sheet.SHEET_WIDTH;
-		return area;
 	}
 
 	/**
