@@ -6,6 +6,7 @@
  * @author  RYK
  * @since   30/10/2019
  * extended by @author 
+ * Modified by: Adanna
  */
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +37,7 @@ public class Generator {
 		 */
 		Random r = new Random();
 		for (int i = 0; i < numberOfShapes; i++) {
-			shapes.add(new Shape(r.nextInt(MAX_SIZE_WIDTH + 1 - MAX_MIN) + MAX_MIN,
-					r.nextInt(MAX_SIZE_HEIGHT + 1 - MAX_MIN) + MAX_MIN));
+			shapes.add(new Shape(r.nextInt(MAX_SIZE_WIDTH) + MAX_MIN, r.nextInt(MAX_SIZE_HEIGHT) + MAX_MIN));
 		}
 		/*
 		 * THIS METHOD CURRENTLY RETURNS AN EMPTY LIST SO YOU WILL NEED TO ADD IN YOUR

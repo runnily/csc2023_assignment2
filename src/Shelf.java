@@ -6,6 +6,7 @@
  * @author  RYK 
  * @since   30/10/2019
  * extended by @author 
+ * Modified by: Adanna
  */
 
 import java.util.ArrayList;
@@ -72,15 +73,13 @@ public class Shelf {
 	 * @return A string to the information about the shelf
 	 */
 	public String toString() {
-		String output = (" -----------------Shelf--------------------\n ");
-		output += String.format("|%1$-19s|%2$-20s|\n", "Variable", "Values");
-		output += String.format("|%1$-20s|%2$-20s|\n", "Height", getHeight());
-		output += String.format("|%1$-20s|%2$-20s|\n", "Width", getWidth());
-		output += "-------------------------------------------\n";
-		output += "=================Shelf Shapes==============\n";
+		String output = String.format("|%1$-19s|\n", String.format("**Shelf(%d, %d)**", usedWidth, shelfHeight));
+		output += "--------Shapes-------\n";
 		for (Shape s : shapes) {
 			output += s;
+
 		}
+
 		return output;
 	}
 

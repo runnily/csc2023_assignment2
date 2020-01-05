@@ -4,7 +4,7 @@
  *           you wish
  * 
  * @author RYK
- * @since 30/10/2019 extended by @author
+ * @since 30/10/2019 extended by @author Modified by: Adanna
  * 
  **/
 
@@ -12,6 +12,8 @@ public class Shape implements Comparable<Shape> {
 
 	private int sWidth; // width of the shape
 	private int sHeight; // height of the shape
+	private int sArea; // area of shape
+	private int sPerimeter; // perimeter of shape
 
 	/**
 	 * A Shape constructor to set the width and height of a shape.
@@ -28,6 +30,8 @@ public class Shape implements Comparable<Shape> {
 
 		this.sWidth = width;
 		this.sHeight = height;
+		this.sArea = sWidth * sHeight;
+		this.sPerimeter = (sWidth * 2) + (sHeight * 2);
 	}
 
 	/**
@@ -38,13 +42,6 @@ public class Shape implements Comparable<Shape> {
 	}
 
 	/**
-	 * This method is to set the height of a shape
-	 **/
-	public void setHeight(int sHeight) {
-		this.sHeight = sHeight;
-	}
-
-	/**
 	 * @return width of a shape
 	 */
 	public int getWidth() {
@@ -52,25 +49,36 @@ public class Shape implements Comparable<Shape> {
 	}
 
 	/**
-	 * This method is to set the width of a shape
-	 **/
-	public void setWidth(int sWidth) {
-		this.sWidth = sWidth;
+	 * @return area of a shape
+	 */
+	public int getArea() {
+		return sArea;
+	}
+
+	/**
+	 * @return Perminter of a shape
+	 */
+	public int getPerimeter() {
+		return sPerimeter;
 	}
 
 	@Override
 	public int compareTo(Shape o) {
-		// You may want to implement this method
-		return 0;
+		return Integer.compare(sArea, o.sArea);
+	}
+
+	/**
+	 * This would rotate the shape
+	 */
+	public void rotate() {
+		int temp = getWidth();
+		sWidth = getHeight();
+		sHeight = temp;
 	}
 
 	public String toString() {
-		String output = ("-----------------" + "Shape" + "--------------------\n ");
-		output += String.format("|%1$-19s|%2$-20s|\n", "Variable", "Value");
-		output += String.format("|%1$-20s|%2$-20s|\n", "Height", getHeight());
-		output += String.format("|%1$-20s|%2$-20s|\n", "Width", getWidth());
-		// output += String.format("|%1$-20s|%2$-20s|\n", "Width", getWidth());
-		output += "-------------------------------------------\n";
+		String output = String.format("|%1$-19s|\n", String.format("Shape(%d, %d)", sWidth, sHeight));
+		output += "---------------------\n";
 		return output;
 	}
 }

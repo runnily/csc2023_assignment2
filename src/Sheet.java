@@ -6,6 +6,7 @@
  * @author  RYK 
  * @since   30/10/2019
  * extended by @author 
+ * Modified by: Adanna
  */
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,22 @@ public class Sheet {
 		return total;
 	}
 
+	public int allShapes() {
+
+		int total = 0;
+
+		for (Shelf shelf : this.shelves) {
+
+			// has a shelf with at least 1 shape
+			if (!shelf.getShapes().isEmpty()) {
+
+				// add all shelf height to total
+				total += shelf.shapes.size();
+			}
+		}
+		return total;
+	}
+
 	/**
 	 * @return list of all shelves in a sheet
 	 */
@@ -88,18 +105,12 @@ public class Sheet {
 		 * @return A string OUTPUT as required in the specification for displaying a
 		 *         detailed message about the content of each sheet
 		 */
-		String output = (" ----------------- Sheet ------------------\n ");
-		output += String.format("|%1$-19s|%2$-20s|\n", "Variable", "Values");
-		output += String.format("|%1$-20s|%2$-20s|\n", "Height", SHEET_HEIGHT);
-		output += String.format("|%1$-20s|%2$-20s|\n", "Width", SHEET_WIDTH);
-		output += String.format("|%1$-20s|%2$-20s|\n", "Limit", SHAPE_LIMIT);
-		output += String.format("|%1$-20s|%2$-20s|\n", "Shelve height", allShelvesHeight());
-		output += "-------------------------------------------\n";
-		output += "================Sheet Shelves==============\n";
+
+		String output = String.format("===Sheet(%d,%d)===\n", Sheet.SHEET_WIDTH, allShelvesHeight());
 		for (Shelf s : shelves) {
 			output += s;
 		}
-
+		output += "=====================\n";
 		return output;
 	}
 
